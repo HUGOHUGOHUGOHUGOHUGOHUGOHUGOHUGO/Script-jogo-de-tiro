@@ -1,4 +1,4 @@
-local Players = game:GetService("Players") 
+local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local RunService = game:GetService("RunService")
 
@@ -7,14 +7,14 @@ local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
 
 local Frame = Instance.new("Frame")
-Frame.Size = UDim2.new(0, 200, 0, 100)
-Frame.Position = UDim2.new(0.5, -100, 0.2, 0)
+Frame.Size = UDim2.new(0, 250, 0, 200)
+Frame.Position = UDim2.new(0.5, -125, 0.2, 0)
 Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 Frame.Parent = ScreenGui
 
 local ToggleButton = Instance.new("TextButton")
-ToggleButton.Size = UDim2.new(0, 180, 0, 50)
-ToggleButton.Position = UDim2.new(0.5, -90, 0.3, 0)
+ToggleButton.Size = UDim2.new(0, 180, 0, 40)
+ToggleButton.Position = UDim2.new(0.5, -90, 0.05, 0)
 ToggleButton.BackgroundColor3 = Color3.fromRGB(100, 100, 255)
 ToggleButton.Text = "Ativar Contorno"
 ToggleButton.Parent = Frame
@@ -25,6 +25,36 @@ CloseButton.Position = UDim2.new(1, -60, 0, 10)
 CloseButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 CloseButton.Text = "X"
 CloseButton.Parent = Frame
+
+local SpeedLabel = Instance.new("TextLabel")
+SpeedLabel.Size = UDim2.new(0, 200, 0, 20)
+SpeedLabel.Position = UDim2.new(0.5, -100, 0.3, 0)
+SpeedLabel.BackgroundTransparency = 1
+SpeedLabel.Text = "Velocidade: 16"
+SpeedLabel.TextColor3 = Color3.new(1, 1, 1)
+SpeedLabel.Parent = Frame
+
+local SpeedSlider = Instance.new("TextBox")
+SpeedSlider.Size = UDim2.new(0, 180, 0, 30)
+SpeedSlider.Position = UDim2.new(0.5, -90, 0.4, 0)
+SpeedSlider.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+SpeedSlider.Text = "16"
+SpeedSlider.Parent = Frame
+
+local JumpLabel = Instance.new("TextLabel")
+JumpLabel.Size = UDim2.new(0, 200, 0, 20)
+JumpLabel.Position = UDim2.new(0.5, -100, 0.55, 0)
+JumpLabel.BackgroundTransparency = 1
+JumpLabel.Text = "Poder do Pulo: 50"
+JumpLabel.TextColor3 = Color3.new(1, 1, 1)
+JumpLabel.Parent = Frame
+
+local JumpSlider = Instance.new("TextBox")
+JumpSlider.Size = UDim2.new(0, 180, 0, 30)
+JumpSlider.Position = UDim2.new(0.5, -90, 0.65, 0)
+JumpSlider.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+JumpSlider.Text = "50"
+JumpSlider.Parent = Frame
 
 local isActive = false
 local highlights = {}
@@ -89,4 +119,30 @@ end)
 -- Fechar a GUI
 CloseButton.MouseButton1Click:Connect(function()
     Frame.Visible = false
+end)
+
+-- Atualizar velocidade
+SpeedSlider.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        local newSpeed = tonumber(SpeedSlider.Text)
+        if newSpeed and newSpeed > 0 then
+            LocalPlayer.Character.Humanoid.WalkSpeed = newSpeed
+            SpeedLabel.Text = "Velocidade: " .. newSpeed
+        else
+            SpeedSlider.Text = "16" -- Valor padrão
+        end
+    end
+end)
+
+-- Atualizar poder do pulo
+JumpSlider.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        local newJump = tonumber(JumpSlider.Text)
+        if newJump and newJump > 0 then
+            LocalPlayer.Character.Humanoid.JumpPower = newJump
+            JumpLabel.Text = "Poder do Pulo: " .. newJump
+        else
+            JumpSlider.Text = "50" -- Valor padrão
+        end
+    end
 end)
