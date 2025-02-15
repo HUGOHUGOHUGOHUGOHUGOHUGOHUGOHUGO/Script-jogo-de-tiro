@@ -8,7 +8,7 @@ ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
 
 -- Frame principal do menu
 local Frame = Instance.new("Frame")
-Frame.Size = UDim2.new(0, 250, 0, 250)
+Frame.Size = UDim2.new(0, 300, 0, 300)
 Frame.Position = UDim2.new(0.5, -125, 0.2, 0)
 Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 Frame.Parent = ScreenGui
@@ -24,7 +24,7 @@ CloseButton.Parent = Frame
 -- Botão para ativar/desativar o efeito "Carro Roxo"
 local ToggleButton = Instance.new("TextButton")
 ToggleButton.Size = UDim2.new(0, 180, 0, 40)
-ToggleButton.Position = UDim2.new(0.5, -90, 0.05, 0)
+ToggleButton.Position = UDim2.new(0.5, -100, 0.05, 0)
 ToggleButton.BackgroundColor3 = Color3.fromRGB(100, 100, 255)
 ToggleButton.Text = "Carro Roxo"
 ToggleButton.Parent = Frame
